@@ -59,10 +59,46 @@
           Arial;
         line-height: 1.55;
       }
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        background: #05070c;
+      }
+      .backdrop img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.25) contrast(1.15) brightness(0.65);
+        transform: scale(1.04);
+        animation: slow-zoom 14s ease-in-out infinite;
+      }
+      .backdrop .vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 50% 40%,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.65) 70%,
+          rgba(0, 0, 0, 0.92) 100%
+        );
+        pointer-events: none;
+      }
+      .backdrop .grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.16;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
       .wrap {
         max-width: 980px;
         margin: 0 auto;
         padding: 24px 16px 60px;
+        position: relative;
+        z-index: 2;
       }
       header {
         display: flex;
@@ -92,6 +128,21 @@
         padding: 8px 10px;
         border-radius: 999px;
         align-self: flex-start;
+        position: relative;
+        overflow: hidden;
+      }
+      .progress::after {
+        content: "";
+        position: absolute;
+        inset: -60% -20%;
+        background: radial-gradient(
+          circle at 30% 50%,
+          rgba(255, 90, 90, 0.55),
+          transparent 55%
+        );
+        opacity: 0.15;
+        animation: pulse 2.4s ease-in-out infinite;
+        pointer-events: none;
       }
       .panel {
         border: 1px solid var(--line);
@@ -99,6 +150,7 @@
         backdrop-filter: blur(6px);
         border-radius: 18px;
         padding: 18px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
       }
       .hero {
         display: flex;
@@ -115,6 +167,36 @@
         margin: 0;
         color: var(--muted);
         font-size: 14px;
+      }
+      .stat {
+        border: 1px solid rgba(255, 90, 90, 0.35);
+        background: rgba(255, 90, 90, 0.08);
+        border-radius: 14px;
+        padding: 12px 14px;
+        display: grid;
+        gap: 6px;
+      }
+      .stat-title {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.2px;
+      }
+      .stat-value {
+        font-size: 28px;
+        font-weight: 900;
+        color: #ff7a7a;
+      }
+      .stat-desc {
+        font-size: 13px;
+        color: var(--text);
+      }
+      .stat-source {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .stat-source a {
+        color: var(--muted);
       }
       .grid {
         display: grid;
@@ -254,6 +336,8 @@
         background: rgba(255, 90, 90, 0.08);
         border-radius: 16px;
         padding: 16px;
+        box-shadow: 0 0 0 1px rgba(255, 90, 90, 0.12),
+          0 0 40px rgba(255, 90, 90, 0.2);
       }
       .final .big {
         font-size: 20px;
@@ -279,13 +363,15 @@
       textarea {
         width: 100%;
         min-height: 86px;
-        resize: vertical;
+        resize: none;
         background: transparent;
         color: var(--text);
         border: none;
         outline: none;
         font-size: 13px;
         line-height: 1.5;
+        overflow: hidden;
+        height: auto;
       }
       .minirow {
         display: flex;
@@ -313,9 +399,62 @@
       .hidden {
         display: none !important;
       }
+      .impact {
+        animation: impact 0.3s ease;
+      }
+      .flash {
+        animation: flash 0.35s ease;
+      }
+      @keyframes slow-zoom {
+        0% {
+          transform: scale(1.03);
+        }
+        50% {
+          transform: scale(1.09);
+        }
+        100% {
+          transform: scale(1.03);
+        }
+      }
+      @keyframes impact {
+        0% {
+          transform: translateY(0);
+        }
+        35% {
+          transform: translateY(-4px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+      @keyframes flash {
+        0% {
+          box-shadow: 0 0 0 rgba(255, 90, 90, 0);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(255, 90, 90, 0.45);
+        }
+        100% {
+          box-shadow: 0 0 0 rgba(255, 90, 90, 0);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+      }
     </style>
   </head>
   <body>
+    <div id="backdrop" class="backdrop">
+      <img id="bgImg" alt="" />
+      <div class="grain"></div>
+      <div class="vignette"></div>
+    </div>
     <div class="wrap">
       <header>
         <div class="brand">
@@ -334,9 +473,17 @@
               이 장면은 ‘미래 예측’이 아니라 <b>이미 진행 중인 현재</b>일 수
               있습니다.
             </p>
-            <div class="kicker">
-              ※ 이미지 URL은 운영 환경에 맞게 교체하세요(직접 촬영/라이선스 확보
-              권장).
+            <div
+              class="kicker"
+              style="
+                margin-top: 12px;
+                font-size: 14px;
+                color: var(--text);
+                opacity: 0.9;
+              "
+            >
+              올해 수능을 치른 현역 학생은 약 30만 명입니다.<br />
+              이 숫자는 이미 줄어든 ‘결과’입니다.
             </div>
           </div>
           <div id="photoGrid" class="grid"></div>
@@ -347,6 +494,10 @@
           <div class="hero">
             <h1>당신이 생각하는 가장 큰 이유는 무엇인가요?</h1>
             <p>정답은 없습니다. 다만, 선택은 현실로 이어집니다.</p>
+            <div class="kicker" style="margin-top: 10px; font-size: 13px">
+              당신의 선택은 틀리지 않습니다.<br />
+              다만, 이미 줄어든 선택지 중 하나일 뿐입니다.
+            </div>
           </div>
           <div class="btnrow" id="q1"></div>
         </section>
@@ -364,6 +515,17 @@
               <h2 id="factHeadline"></h2>
               <p id="factText"></p>
               <div class="divider"></div>
+              <p
+                style="
+                  margin: 0 0 12px;
+                  font-size: 13px;
+                  color: var(--muted);
+                  font-style: italic;
+                "
+              >
+                이 변화는 예측이 아닙니다.<br />
+                이미 통계로 기록되고, 현장에서 확인되는 현재입니다.
+              </p>
               <div class="kicker">
                 다음 질문: 그래도 누군가는 왜 ‘낳았을까요?’
               </div>
@@ -381,13 +543,249 @@
 
           <div class="final">
             <p class="big">
-              <span>출산율</span>은 개인의 의지 문제가 아니라,<br />선택할 수
-              없게 만든 구조의 결과입니다.
+              <span>출산율</span>은 선택의 문제가 아니라,<br />선택지가 사라진
+              결과입니다.
             </p>
             <p>
               오늘 당신이 고른 답은 ‘틀린 답’이 아닙니다.<br />하지만 모든 답은
               같은 현실을 가리키고 있었습니다.
             </p>
+            <div class="divider" style="margin: 14px 0"></div>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6">
+              출산율은 갑자기 떨어지지 않았습니다.<br />
+              사회가 먼저 아이를 감당하지 못하게 됐을 뿐입니다.
+            </p>
+          </div>
+
+          <div class="stat impact" style="margin-top: 18px">
+            <div class="stat-title">현재 합계출산율 (World Bank)</div>
+            <div class="stat-value">0.721</div>
+            <div class="stat-desc">
+              2023년 최신치 기준. 인구 대체수준 2.1의 약 34%에 불과합니다.
+            </div>
+            <div class="stat-source">
+              출처:
+              <a
+                href="https://api.worldbank.org/v2/country/KOR/indicator/SP.DYN.TFRT.IN?format=json"
+                target="_blank"
+                rel="noopener"
+                >World Bank Data API</a
+              >
+            </div>
+          </div>
+
+          <div class="fact" style="margin-top: 18px">
+            <div class="box">
+              <h2>출생아·합계출산율 추이</h2>
+              <p style="margin: 0 0 14px; font-size: 13px; color: var(--muted)">
+                통계청 장래 인구 추계 중위 추계 기준
+              </p>
+
+              <div style="margin: 14px 0">
+                <div style="margin-bottom: 12px">
+                  <div
+                    style="
+                      font-size: 12px;
+                      color: var(--muted);
+                      margin-bottom: 4px;
+                    "
+                  >
+                    합계출산율
+                  </div>
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(4, 1fr);
+                      gap: 8px;
+                      font-size: 13px;
+                    "
+                  >
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2000
+                      </div>
+                      <div style="color: var(--danger); font-weight: 700">
+                        1.48
+                      </div>
+                    </div>
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2020
+                      </div>
+                      <div style="color: var(--danger); font-weight: 700">
+                        0.84
+                      </div>
+                    </div>
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2022
+                      </div>
+                      <div style="color: var(--danger); font-weight: 700">
+                        0.78
+                      </div>
+                    </div>
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2025
+                      </div>
+                      <div style="color: var(--danger); font-weight: 700">
+                        0.65
+                      </div>
+                      <div style="font-size: 11px; color: var(--muted)">
+                        (최저)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div style="margin-top: 14px">
+                  <div
+                    style="
+                      font-size: 12px;
+                      color: var(--muted);
+                      margin-bottom: 4px;
+                    "
+                  >
+                    출생아 수
+                  </div>
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: repeat(4, 1fr);
+                      gap: 8px;
+                      font-size: 13px;
+                    "
+                  >
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2000
+                      </div>
+                      <div style="color: var(--text); font-weight: 700">
+                        64만명
+                      </div>
+                    </div>
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2020
+                      </div>
+                      <div style="color: var(--text); font-weight: 700">
+                        27만명
+                      </div>
+                    </div>
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2022
+                      </div>
+                      <div style="color: var(--text); font-weight: 700">
+                        25만명
+                      </div>
+                    </div>
+                    <div>
+                      <div style="color: var(--text); font-weight: 700">
+                        2060
+                      </div>
+                      <div style="color: var(--danger); font-weight: 700">
+                        16만명
+                      </div>
+                      <div style="font-size: 11px; color: var(--muted)">
+                        (예상)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="divider"></div>
+              <p
+                style="
+                  margin: 14px 0 0;
+                  font-size: 12px;
+                  color: var(--muted);
+                  line-height: 1.5;
+                "
+              >
+                ※합계출산율은 여성 1명이 평생 낳을 것으로 예상되는 평균 출생아
+                수<br />
+                <span style="font-size: 11px">출처: 통계청</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="fact" style="margin-top: 18px">
+            <div class="box">
+              <h2>이 숫자가 의미하는 것</h2>
+              <p>
+                합계출산율 0.721명은 세계 최저 수준입니다. 이는 현재 출산
+                연령대의 여성들이 평생 동안 낳을 것으로 예상되는 자녀 수가
+                1명에도 미치지 못한다는 뜻입니다.
+              </p>
+              <div class="divider"></div>
+              <p style="margin: 0; color: var(--danger); font-weight: 700">
+                만약 이 추세가 계속된다면, 2100년 한국 인구는 현재의 절반 이하로
+                줄어들 것으로 예측됩니다. 학교는 문을 닫고, 병원은 줄어들며,
+                지역은 사라집니다. 이것은 미래의 이야기가 아니라, 이미 시작된
+                현재입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="fact" style="margin-top: 18px">
+            <div class="box">
+              <h2>이미 시작된 현재</h2>
+              <p>
+                올해 수능을 치른 현역 학생은 약 30만 명입니다.<br />
+                30년 전의 3분의 1 수준입니다.
+              </p>
+              <div class="divider"></div>
+              <p style="margin: 0; color: var(--danger); font-weight: 700">
+                학교, 의료, 지역이 흔들리는 이유는<br />
+                2100년의 문제가 아니라, 이미 시작된 현재이기 때문입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="fact" style="margin-top: 18px">
+            <div class="box">
+              <h2>지금 현재 일어나는 일</h2>
+              <p>
+                <strong>학교:</strong> 학생이 사라져서 학교가 닫히는 게
+                아닙니다.<br />
+                학교가 유지되지 못할 만큼, 아이가 줄었습니다.
+              </p>
+              <div class="divider"></div>
+              <p>
+                <strong>의료:</strong> 아이를 낳지 않는 것이 아니라,<br />
+                낳을 수 있는 병원이 사라지고 있습니다.
+              </p>
+              <div class="divider"></div>
+              <p style="margin: 0">
+                <strong>지역:</strong> 지역이 사라지는 이유는 사람이 떠나서가
+                아니라,<br />
+                애초에 들어오지 않기 때문입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="fact" style="margin-top: 18px">
+            <div class="box">
+              <h2>이건 경고가 아니라, 보고서입니다</h2>
+              <p
+                style="
+                  margin: 0;
+                  color: var(--danger);
+                  font-weight: 700;
+                  font-size: 15px;
+                  line-height: 1.7;
+                "
+              >
+                아이 수는 줄었고,<br />
+                학교는 닫혔고,<br />
+                병원은 떠났습니다.<br />
+                이 순서는 이미 끝난 이야기입니다.
+              </p>
+            </div>
           </div>
 
           <div class="copybox">
@@ -527,11 +925,24 @@
       const btnCopyCaption = document.getElementById("btnCopyCaption");
       const btnCopyLink = document.getElementById("btnCopyLink");
       const btnRestart = document.getElementById("btnRestart");
+      const bgImg = document.getElementById("bgImg");
+
+      const finalBackdrop = "https://picsum.photos/1400/900?random=21";
 
       // ====== 유틸 ======
       function showOnly(screen) {
         [s0, s1, s2, s3].forEach((el) => el.classList.add("hidden"));
         screen.classList.remove("hidden");
+      }
+      function setBackdrop(src) {
+        if (!src) return;
+        bgImg.src = src;
+      }
+      function flashScreen() {
+        document.body.classList.remove("flash");
+        void document.body.offsetWidth;
+        document.body.classList.add("flash");
+        setTimeout(() => document.body.classList.remove("flash"), 360);
       }
       function setProgress(step) {
         // 총 4단계(사진, 1차, 팩트+2차, 결말)
@@ -557,6 +968,11 @@
         // 배포 후엔 실제 URL이 들어가며, 로컬에선 file://일 수 있음
         return location.href;
       }
+      function autoResizeTextarea(textarea) {
+        if (!textarea) return;
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+      }
 
       // ====== 렌더: 사진 그리드 ======
       function renderEntryPhotos() {
@@ -573,6 +989,8 @@
         `;
           card.addEventListener("click", () => {
             state.entryPhotoIdx = idx;
+            setBackdrop(p.img);
+            flashScreen();
             setProgress(1);
             showOnly(s1);
           });
@@ -596,6 +1014,8 @@
             factText.textContent = f.text;
             factImg.src = f.img;
 
+            setBackdrop(f.img);
+            flashScreen();
             setProgress(2);
             showOnly(s2);
           });
@@ -613,6 +1033,8 @@
           b.addEventListener("click", () => {
             state.q2 = opt.key;
             setProgress(3);
+            setBackdrop(finalBackdrop);
+            flashScreen();
             // 최종 공유 문구 생성
             const chosenPhoto =
               entryPhotos[state.entryPhotoIdx]?.title ?? "사진";
@@ -633,6 +1055,7 @@
 👉 ${currentUrl()}`;
 
             shareText.value = caption;
+            setTimeout(() => autoResizeTextarea(shareText), 10);
             showOnly(s3);
             setProgress(4);
           });
@@ -651,6 +1074,7 @@
         state.q2 = null;
         showOnly(s0);
         setProgress(0);
+        setBackdrop(entryPhotos[0]?.img);
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
 
@@ -660,6 +1084,14 @@
       renderQ2();
       setProgress(0);
       showOnly(s0);
+      setBackdrop(entryPhotos[0]?.img);
+
+      // textarea 자동 높이 조정
+      if (shareText) {
+        shareText.addEventListener("input", () =>
+          autoResizeTextarea(shareText)
+        );
+      }
     </script>
   </body>
 </html>
