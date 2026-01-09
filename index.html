@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>출산율 체감 테스트 — 선택이 사라지는 사회</title>
+    <meta
+      name="description"
+      content="사진을 누르고, 선택하고, 마지막 문장을 마주하는 인터랙티브 체감형 페이지."
+    />
+
+    <!-- OG -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="출산율 체감 테스트 — 선택이 사라지는 사회"
+    />
+    <meta
+      property="og:description"
+      content="정답은 없지만, 결말은 같습니다. 사진을 누르고 선택해보세요."
+    />
+    <!-- og:image는 너가 만든 이미지 URL로 교체 -->
+    <meta
+      property="og:image"
+      content="https://picsum.photos/1200/630?random=10"
+    />
+
+    <!-- 심플 파비콘 (SVG data URI) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Crect width='128' height='128' rx='24' fill='%230b0f17'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-size='64'%3E%F0%9F%93%B7%3C/text%3E%3C/svg%3E"
+    />
+
+    <style>
+      :root {
+        --bg: #0b0f17;
+        --card: #121a27;
+        --muted: #9fb0c7;
+        --text: #e9f0ff;
+        --line: #22314a;
+        --btn: #1b2a44;
+        --btn2: #233556;
+        --danger: #ff5a5a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: linear-gradient(
+          180deg,
+          #070a10 0%,
+          var(--bg) 45%,
+          #070a10 100%
+        );
+        color: var(--text);
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont,
+          "Apple SD Gothic Neo", "Noto Sans KR", Segoe UI, Roboto, Helvetica,
+          Arial;
+        line-height: 1.55;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 24px 16px 60px;
+      }
+      header {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 18px;
+      }
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .title {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.2px;
+      }
+      .sub {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .progress {
+        font-size: 12px;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        padding: 8px 10px;
+        border-radius: 999px;
+        align-self: flex-start;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        background: rgba(18, 26, 39, 0.78);
+        backdrop-filter: blur(6px);
+        border-radius: 18px;
+        padding: 18px;
+      }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .hero h1 {
+        margin: 0;
+        font-size: 26px;
+        letter-spacing: -0.4px;
+      }
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 520px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .card {
+        border: 1px solid var(--line);
+        background: linear-gradient(
+          180deg,
+          rgba(18, 26, 39, 0.92),
+          rgba(18, 26, 39, 0.72)
+        );
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.12s ease, border-color 0.12s ease;
+        min-height: 230px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        border-color: #385482;
+      }
+      .img {
+        height: 150px;
+        width: 100%;
+        background: #0b0f17;
+        display: block;
+        object-fit: cover;
+      }
+      .card .meta {
+        padding: 12px 12px 14px;
+      }
+      .tag {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .card .meta b {
+        display: block;
+        margin-top: 6px;
+        font-size: 15px;
+      }
+      .btnrow {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .btn {
+        border: 1px solid var(--line);
+        background: var(--btn);
+        color: var(--text);
+        padding: 12px 14px;
+        border-radius: 14px;
+        cursor: pointer;
+        transition: background 0.12s ease, transform 0.12s ease;
+        font-weight: 700;
+        flex: 1;
+        min-width: 160px;
+        text-align: left;
+      }
+      .btn:hover {
+        background: var(--btn2);
+        transform: translateY(-1px);
+      }
+      .btn small {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .kicker {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .fact {
+        display: flex;
+        gap: 14px;
+        align-items: stretch;
+        margin-top: 10px;
+      }
+      @media (max-width: 720px) {
+        .fact {
+          flex-direction: column;
+        }
+      }
+      .fact img {
+        width: 44%;
+        min-height: 220px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        object-fit: cover;
+        background: #0b0f17;
+      }
+      @media (max-width: 720px) {
+        .fact img {
+          width: 100%;
+          height: 220px;
+        }
+      }
+      .fact .box {
+        flex: 1;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px;
+        background: rgba(11, 15, 23, 0.35);
+      }
+      .fact .box h2 {
+        margin: 0 0 6px;
+        font-size: 18px;
+      }
+      .fact .box p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .divider {
+        height: 1px;
+        background: var(--line);
+        margin: 14px 0;
+      }
+      .final {
+        border: 1px solid rgba(255, 90, 90, 0.25);
+        background: rgba(255, 90, 90, 0.08);
+        border-radius: 16px;
+        padding: 16px;
+      }
+      .final .big {
+        font-size: 20px;
+        font-weight: 900;
+        letter-spacing: -0.3px;
+        margin: 0 0 8px;
+      }
+      .final .big span {
+        color: var(--danger);
+      }
+      .final p {
+        margin: 0;
+        color: var(--text);
+        opacity: 0.92;
+      }
+      .copybox {
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 12px;
+        background: rgba(18, 26, 39, 0.55);
+      }
+      textarea {
+        width: 100%;
+        min-height: 86px;
+        resize: vertical;
+        background: transparent;
+        color: var(--text);
+        border: none;
+        outline: none;
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      .minirow {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .mini {
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(18, 26, 39, 0.65);
+        cursor: pointer;
+        color: var(--text);
+        font-weight: 800;
+      }
+      .mini:hover {
+        background: rgba(35, 53, 86, 0.75);
+      }
+      footer {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <div class="title">출산율 체감 테스트</div>
+          <div class="sub">사진을 누르고 선택하면, 마지막 문장이 남습니다.</div>
+        </div>
+        <div id="progress" class="progress">0 / 4</div>
+      </header>
+
+      <main class="panel">
+        <!-- SCREEN 0: 사진 선택 -->
+        <section id="s0">
+          <div class="hero">
+            <h1>질문은 없습니다. 먼저, 사진을 눌러주세요.</h1>
+            <p>
+              이 장면은 ‘미래 예측’이 아니라 <b>이미 진행 중인 현재</b>일 수
+              있습니다.
+            </p>
+            <div class="kicker">
+              ※ 이미지 URL은 운영 환경에 맞게 교체하세요(직접 촬영/라이선스 확보
+              권장).
+            </div>
+          </div>
+          <div id="photoGrid" class="grid"></div>
+        </section>
+
+        <!-- SCREEN 1: 1차 선택 -->
+        <section id="s1" class="hidden">
+          <div class="hero">
+            <h1>당신이 생각하는 가장 큰 이유는 무엇인가요?</h1>
+            <p>정답은 없습니다. 다만, 선택은 현실로 이어집니다.</p>
+          </div>
+          <div class="btnrow" id="q1"></div>
+        </section>
+
+        <!-- SCREEN 2: 선택별 팩트 화면 + 2차 선택 -->
+        <section id="s2" class="hidden">
+          <div class="hero">
+            <h1 id="factTitle">선택의 화면</h1>
+            <p id="factSub">짧게 읽고, 다음 선택으로 넘어가세요.</p>
+          </div>
+
+          <div class="fact">
+            <img id="factImg" alt="팩트 이미지" />
+            <div class="box">
+              <h2 id="factHeadline"></h2>
+              <p id="factText"></p>
+              <div class="divider"></div>
+              <div class="kicker">
+                다음 질문: 그래도 누군가는 왜 ‘낳았을까요?’
+              </div>
+              <div class="btnrow" id="q2" style="margin-top: 10px"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SCREEN 3: 최종 -->
+        <section id="s3" class="hidden">
+          <div class="hero">
+            <h1>결말</h1>
+            <p>당신의 답은 틀리지 않았습니다. 다만, 결론은 하나로 모입니다.</p>
+          </div>
+
+          <div class="final">
+            <p class="big">
+              <span>출산율</span>은 개인의 의지 문제가 아니라,<br />선택할 수
+              없게 만든 구조의 결과입니다.
+            </p>
+            <p>
+              오늘 당신이 고른 답은 ‘틀린 답’이 아닙니다.<br />하지만 모든 답은
+              같은 현실을 가리키고 있었습니다.
+            </p>
+          </div>
+
+          <div class="copybox">
+            <div class="kicker">공유용 캡션(복사해서 SNS에 붙여넣기)</div>
+            <textarea id="shareText" readonly></textarea>
+            <div class="minirow">
+              <button class="mini" id="btnCopyCaption">캡션 복사</button>
+              <button class="mini" id="btnCopyLink">링크 복사</button>
+              <button class="mini" id="btnRestart">다시하기</button>
+            </div>
+          </div>
+
+          <footer>
+            이 페이지는 설득이 아니라 ‘체감’을 목표로 합니다. 숫자 논쟁을
+            피하고, 이미 존재하는 장면과 선택의 흐름을 통해 현실감을 높였습니다.
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      // ====== 데이터(여기만 바꾸면 컨텐츠 교체 가능) ======
+      // 진입 사진들(클릭 유도 카드)
+      const entryPhotos = [
+        {
+          tag: "지역 소멸",
+          title: "아이 소리가 사라진 마을",
+          img: "https://picsum.photos/800/500?random=1",
+        },
+        {
+          tag: "교육 인프라",
+          title: "문 닫는 어린이집/학원",
+          img: "https://picsum.photos/800/500?random=2",
+        },
+        {
+          tag: "도시 주거",
+          title: "좁아지는 삶의 공간",
+          img: "https://picsum.photos/800/500?random=3",
+        },
+        {
+          tag: "의료 인프라",
+          title: "사라지는 산부인과",
+          img: "https://picsum.photos/800/500?random=4",
+        },
+        {
+          tag: "돌봄 격차",
+          title: "누가 돌볼 것인가",
+          img: "https://picsum.photos/800/500?random=5",
+        },
+        {
+          tag: "고령화",
+          title: "늘어나는 노년의 비율",
+          img: "https://picsum.photos/800/500?random=6",
+        },
+      ];
+
+      // 1차 질문 옵션
+      const q1Options = [
+        { key: "money", label: "경제적 부담", desc: "주거·교육·생활비의 압박" },
+        { key: "career", label: "시간·커리어", desc: "경력 단절·육아 공백" },
+        { key: "system", label: "제도·구조", desc: "돌봄·노동·지원의 공백" },
+        { key: "values", label: "가치관 변화", desc: "결혼·출산 필요성 약화" },
+      ];
+
+      // 선택별 ‘팩트형’ 화면(숫자 대신 짧은 사실 문장 + 이미지)
+      const factByKey = {
+        money: {
+          title: "경제를 골랐습니다",
+          headline: "비싼 삶은 출산을 ‘결단’으로 바꿉니다.",
+          text:
+            "주거와 양육 비용이 높아질수록 출산은 자연스러운 단계가 아니라 ‘큰 결심’이 됩니다. " +
+            "사람이 의지가 없어서가 아니라, 위험과 비용이 한쪽으로 쏠리면 선택은 줄어듭니다.",
+          img: "https://picsum.photos/1000/700?random=11",
+        },
+        career: {
+          title: "커리어를 골랐습니다",
+          headline: "출산은 시간이 아니라 ‘되돌릴 수 없는 공백’이 됩니다.",
+          text:
+            "일·돌봄의 균형이 개인에게만 맡겨질 때, 출산은 단순한 일정 조정이 아니라 삶의 궤도 변경이 됩니다. " +
+            "특히 경력 회복이 어렵다고 느낄수록 선택은 뒤로 밀립니다.",
+          img: "https://picsum.photos/1000/700?random=12",
+        },
+        system: {
+          title: "구조를 골랐습니다",
+          headline: "돌봄이 공공의 일이 아니면, 출산은 가족의 체력전이 됩니다.",
+          text:
+            "제도와 인프라가 부족하면 부담은 개인과 가족에게 집중됩니다. " +
+            "돌봄 공백이 커질수록 출산은 ‘사랑’의 문제가 아니라 ‘운영’의 문제가 됩니다.",
+          img: "https://picsum.photos/1000/700?random=13",
+        },
+        values: {
+          title: "가치관을 골랐습니다",
+          headline: "가치관은 갑자기 바뀌지 않습니다. 환경이 바꾸게 합니다.",
+          text:
+            "불확실성이 커지고 삶의 안전망이 약해질수록 사람들은 큰 결정을 미룹니다. " +
+            "가치관 변화는 원인이기도 하지만, 동시에 구조적 압박의 결과이기도 합니다.",
+          img: "https://picsum.photos/1000/700?random=14",
+        },
+      };
+
+      // 2차 질문 옵션(어떤 걸 골라도 결말은 동일하게 수렴)
+      const q2Options = [
+        {
+          key: "responsibility",
+          label: "개인의 책임감",
+          desc: "내가 감당한다",
+        },
+        { key: "family", label: "가족의 도움", desc: "지원이 있어 가능했다" },
+        { key: "support", label: "제도적 지원", desc: "환경이 받쳐줬다" },
+        { key: "just", label: "그냥 선택", desc: "설명하기 어렵다" },
+      ];
+
+      // ====== 상태 ======
+      const state = {
+        entryPhotoIdx: null,
+        q1: null,
+        q2: null,
+      };
+
+      // ====== DOM ======
+      const s0 = document.getElementById("s0");
+      const s1 = document.getElementById("s1");
+      const s2 = document.getElementById("s2");
+      const s3 = document.getElementById("s3");
+      const progress = document.getElementById("progress");
+
+      const photoGrid = document.getElementById("photoGrid");
+      const q1 = document.getElementById("q1");
+      const q2 = document.getElementById("q2");
+
+      const factTitle = document.getElementById("factTitle");
+      const factHeadline = document.getElementById("factHeadline");
+      const factText = document.getElementById("factText");
+      const factImg = document.getElementById("factImg");
+
+      const shareText = document.getElementById("shareText");
+      const btnCopyCaption = document.getElementById("btnCopyCaption");
+      const btnCopyLink = document.getElementById("btnCopyLink");
+      const btnRestart = document.getElementById("btnRestart");
+
+      // ====== 유틸 ======
+      function showOnly(screen) {
+        [s0, s1, s2, s3].forEach((el) => el.classList.add("hidden"));
+        screen.classList.remove("hidden");
+      }
+      function setProgress(step) {
+        // 총 4단계(사진, 1차, 팩트+2차, 결말)
+        progress.textContent = `${step} / 4`;
+      }
+      function safeCopy(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(text)
+            .then(() => alert("복사했습니다."));
+        } else {
+          // 폴백
+          const t = document.createElement("textarea");
+          t.value = text;
+          document.body.appendChild(t);
+          t.select();
+          document.execCommand("copy");
+          document.body.removeChild(t);
+          alert("복사했습니다.");
+        }
+      }
+      function currentUrl() {
+        // 배포 후엔 실제 URL이 들어가며, 로컬에선 file://일 수 있음
+        return location.href;
+      }
+
+      // ====== 렌더: 사진 그리드 ======
+      function renderEntryPhotos() {
+        photoGrid.innerHTML = "";
+        entryPhotos.forEach((p, idx) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+          <img class="img" src="${p.img}" alt="${p.title}" loading="lazy" />
+          <div class="meta">
+            <div class="tag">${p.tag}</div>
+            <b>${p.title}</b>
+          </div>
+        `;
+          card.addEventListener("click", () => {
+            state.entryPhotoIdx = idx;
+            setProgress(1);
+            showOnly(s1);
+          });
+          photoGrid.appendChild(card);
+        });
+      }
+
+      // ====== 렌더: 1차 질문 ======
+      function renderQ1() {
+        q1.innerHTML = "";
+        q1Options.forEach((opt) => {
+          const b = document.createElement("button");
+          b.className = "btn";
+          b.innerHTML = `${opt.label}<small>${opt.desc}</small>`;
+          b.addEventListener("click", () => {
+            state.q1 = opt.key;
+            // 팩트 화면 세팅
+            const f = factByKey[state.q1];
+            factTitle.textContent = f.title;
+            factHeadline.textContent = f.headline;
+            factText.textContent = f.text;
+            factImg.src = f.img;
+
+            setProgress(2);
+            showOnly(s2);
+          });
+          q1.appendChild(b);
+        });
+      }
+
+      // ====== 렌더: 2차 질문 ======
+      function renderQ2() {
+        q2.innerHTML = "";
+        q2Options.forEach((opt) => {
+          const b = document.createElement("button");
+          b.className = "btn";
+          b.innerHTML = `${opt.label}<small>${opt.desc}</small>`;
+          b.addEventListener("click", () => {
+            state.q2 = opt.key;
+            setProgress(3);
+            // 최종 공유 문구 생성
+            const chosenPhoto =
+              entryPhotos[state.entryPhotoIdx]?.title ?? "사진";
+            const chosenQ1 =
+              q1Options.find((x) => x.key === state.q1)?.label ?? "선택";
+            const chosenQ2 =
+              q2Options.find((x) => x.key === state.q2)?.label ?? "선택";
+
+            const caption = `[출산율 체감 테스트]
+내가 누른 사진: ${chosenPhoto}
+내 선택 1: ${chosenQ1}
+내 선택 2: ${chosenQ2}
+
+정답은 없었는데, 결말은 같았다.
+“출산율은 개인의 의지 문제가 아니라,
+선택할 수 없게 만든 구조의 결과입니다.”
+
+👉 ${currentUrl()}`;
+
+            shareText.value = caption;
+            showOnly(s3);
+            setProgress(4);
+          });
+          q2.appendChild(b);
+        });
+      }
+
+      // ====== 버튼 이벤트 ======
+      btnCopyCaption?.addEventListener("click", () =>
+        safeCopy(shareText.value)
+      );
+      btnCopyLink?.addEventListener("click", () => safeCopy(currentUrl()));
+      btnRestart?.addEventListener("click", () => {
+        state.entryPhotoIdx = null;
+        state.q1 = null;
+        state.q2 = null;
+        showOnly(s0);
+        setProgress(0);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // ====== 초기화 ======
+      renderEntryPhotos();
+      renderQ1();
+      renderQ2();
+      setProgress(0);
+      showOnly(s0);
+    </script>
+  </body>
+</html>
