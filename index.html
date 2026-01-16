@@ -1100,6 +1100,8 @@
       function setLang(lang, options = {}) {
         const nextLang = translations[lang] ? lang : defaultLang;
         currentLang = nextLang;
+        window.currentLang = currentLang;
+        window.t = t;
         document.documentElement.lang = nextLang;
         localStorage.setItem("preferredLang", nextLang);
         document.querySelectorAll(".lang-switch button").forEach((button) => {
@@ -1110,6 +1112,12 @@
           const url = new URL(window.location.href);
           url.searchParams.set("lang", nextLang);
           window.history.replaceState({}, "", url);
+        }
+        // 언어 변경 시 동적 콘텐츠 재렌더링
+        if (typeof renderEntryPhotos === "function") {
+          renderEntryPhotos();
+          renderQ1();
+          renderQ2();
         }
       }
       function detectLang() {
