@@ -531,8 +531,8 @@
         <section id="s0">
           <div class="hero">
             <h1 data-i18n="screen0Title">질문은 없습니다. 먼저, 사진을 눌러주세요.</h1>
-            <p>
-              이 장면은 ‘미래 예측’이 아니라 <b>이미 진행 중인 현재</b>일 수
+            <p data-i18n-html="screen0Desc">
+              이 장면은 '미래 예측'이 아니라 <b>이미 진행 중인 현재</b>일 수
               있습니다.
             </p>
             <div
@@ -543,9 +543,10 @@
                 color: var(--text);
                 opacity: 0.9;
               "
+              data-i18n-html="screen0Kicker"
             >
               올해 수능을 치른 현역 학생은 약 30만 명입니다.<br />
-              이 숫자는 이미 줄어든 ‘결과’입니다.
+              이 숫자는 이미 줄어든 '결과'입니다.
             </div>
           </div>
           <div id="photoGrid" class="grid"></div>
@@ -555,8 +556,8 @@
         <section id="s1" class="hidden">
           <div class="hero">
             <h1 data-i18n="screen1Title">당신이 생각하는 가장 큰 이유는 무엇인가요?</h1>
-            <p>정답은 없습니다. 다만, 선택은 현실로 이어집니다.</p>
-            <div class="kicker" style="margin-top: 10px; font-size: 13px">
+            <p data-i18n="screen1Desc">정답은 없습니다. 다만, 선택은 현실로 이어집니다.</p>
+            <div class="kicker" style="margin-top: 10px; font-size: 13px" data-i18n-html="screen1Kicker">
               당신의 선택은 틀리지 않습니다.<br />
               다만, 이미 줄어든 선택지 중 하나일 뿐입니다.
             </div>
@@ -568,7 +569,7 @@
         <section id="s2" class="hidden">
           <div class="hero">
             <h1 id="factTitle" data-i18n="screen2Title">선택의 화면</h1>
-            <p id="factSub">짧게 읽고, 다음 선택으로 넘어가세요.</p>
+            <p id="factSub" data-i18n="screen2Sub">짧게 읽고, 다음 선택으로 넘어가세요.</p>
           </div>
 
           <div class="fact">
@@ -584,12 +585,13 @@
                   color: var(--muted);
                   font-style: italic;
                 "
+                data-i18n-html="screen2Kicker1"
               >
                 이 변화는 예측이 아닙니다.<br />
                 이미 통계로 기록되고, 현장에서 확인되는 현재입니다.
               </p>
-              <div class="kicker">
-                다음 질문: 그래도 누군가는 왜 ‘낳았을까요?’
+              <div class="kicker" data-i18n="screen2Kicker2">
+                다음 질문: 그래도 누군가는 왜 '낳았을까요?'
               </div>
               <div class="btnrow" id="q2" style="margin-top: 10px"></div>
             </div>
@@ -600,33 +602,33 @@
         <section id="s3" class="hidden">
           <div class="hero">
             <h1 data-i18n="screen3Title">결말</h1>
-            <p>당신의 답은 틀리지 않았습니다. 다만, 결론은 하나로 모입니다.</p>
+            <p data-i18n="screen3Desc">당신의 답은 틀리지 않았습니다. 다만, 결론은 하나로 모입니다.</p>
           </div>
 
           <div class="final">
-            <p class="big">
+            <p class="big" data-i18n-html="screen3Final1">
               <span>출산율</span>은 선택의 문제가 아니라,<br />선택지가 사라진
               결과입니다.
             </p>
-            <p>
-              오늘 당신이 고른 답은 ‘틀린 답’이 아닙니다.<br />하지만 모든 답은
+            <p data-i18n-html="screen3Final2">
+              오늘 당신이 고른 답은 '틀린 답'이 아닙니다.<br />하지만 모든 답은
               같은 현실을 가리키고 있었습니다.
             </p>
             <div class="divider" style="margin: 14px 0"></div>
-            <p style="margin: 0; font-size: 14px; line-height: 1.6">
+            <p style="margin: 0; font-size: 14px; line-height: 1.6" data-i18n-html="screen3Final3">
               출산율은 갑자기 떨어지지 않았습니다.<br />
               사회가 먼저 아이를 감당하지 못하게 됐을 뿐입니다.
             </p>
           </div>
 
           <div class="stat impact" style="margin-top: 18px">
-            <div class="stat-title">현재 합계출산율 (World Bank)</div>
-            <div class="stat-value">0.721</div>
-            <div class="stat-desc">
+            <div class="stat-title" data-i18n="statTitle">현재 합계출산율 (World Bank)</div>
+            <div class="stat-value" data-i18n="statValue">0.721</div>
+            <div class="stat-desc" data-i18n="statDesc">
               2023년 최신치 기준. 인구 대체수준 2.1의 약 34%에 불과합니다.
             </div>
             <div class="stat-source">
-              출처:
+              <span data-i18n="statSource">출처:</span>
               <a
                 href="https://api.worldbank.org/v2/country/KOR/indicator/SP.DYN.TFRT.IN?format=json"
                 target="_blank"
@@ -638,22 +640,23 @@
 
           <div class="fact" style="margin-top: 18px">
             <div class="box">
-              <h2>출생아·합계출산율 추이</h2>
-              <p style="margin: 0 0 14px; font-size: 13px; color: var(--muted)">
+              <h2 data-i18n="trendTitle">출생아·합계출산율 추이</h2>
+              <p style="margin: 0 0 14px; font-size: 13px; color: var(--muted)" data-i18n="trendSub">
                 통계청 장래 인구 추계 중위 추계 기준
               </p>
 
               <div style="margin: 14px 0">
                 <div style="margin-bottom: 12px">
-                  <div
-                    style="
-                      font-size: 12px;
-                      color: var(--muted);
-                      margin-bottom: 4px;
-                    "
-                  >
-                    합계출산율
-                  </div>
+                    <div
+                      style="
+                        font-size: 12px;
+                        color: var(--muted);
+                        margin-bottom: 4px;
+                      "
+                      data-i18n="trendLabel1"
+                    >
+                      합계출산율
+                    </div>
                   <div
                     style="
                       display: grid;
@@ -693,7 +696,7 @@
                       <div style="color: var(--danger); font-weight: 700">
                         0.65
                       </div>
-                      <div style="font-size: 11px; color: var(--muted)">
+                      <div style="font-size: 11px; color: var(--muted)" data-i18n="trendLowest">
                         (최저)
                       </div>
                     </div>
@@ -703,15 +706,16 @@
                 <div class="divider"></div>
 
                 <div style="margin-top: 14px">
-                  <div
-                    style="
-                      font-size: 12px;
-                      color: var(--muted);
-                      margin-bottom: 4px;
-                    "
-                  >
-                    출생아 수
-                  </div>
+                    <div
+                      style="
+                        font-size: 12px;
+                        color: var(--muted);
+                        margin-bottom: 4px;
+                      "
+                      data-i18n="trendLabel2"
+                    >
+                      출생아 수
+                    </div>
                   <div
                     style="
                       display: grid;
@@ -751,7 +755,7 @@
                       <div style="color: var(--danger); font-weight: 700">
                         16만명
                       </div>
-                      <div style="font-size: 11px; color: var(--muted)">
+                      <div style="font-size: 11px; color: var(--muted)" data-i18n="trendExpected">
                         (예상)
                       </div>
                     </div>
@@ -767,6 +771,7 @@
                   color: var(--muted);
                   line-height: 1.5;
                 "
+                data-i18n-html="trendNote"
               >
                 ※합계출산율은 여성 1명이 평생 낳을 것으로 예상되는 평균 출생아
                 수<br />
@@ -777,14 +782,14 @@
 
           <div class="fact" style="margin-top: 18px">
             <div class="box">
-              <h2>이 숫자가 의미하는 것</h2>
-              <p>
+              <h2 data-i18n="meaningTitle">이 숫자가 의미하는 것</h2>
+              <p data-i18n="meaningText">
                 합계출산율 0.721명은 세계 최저 수준입니다. 이는 현재 출산
                 연령대의 여성들이 평생 동안 낳을 것으로 예상되는 자녀 수가
                 1명에도 미치지 못한다는 뜻입니다.
               </p>
               <div class="divider"></div>
-              <p style="margin: 0; color: var(--danger); font-weight: 700">
+              <p style="margin: 0; color: var(--danger); font-weight: 700" data-i18n="meaningWarning">
                 만약 이 추세가 계속된다면, 2100년 한국 인구는 현재의 절반 이하로
                 줄어들 것으로 예측됩니다. 학교는 문을 닫고, 병원은 줄어들며,
                 지역은 사라집니다. 이것은 미래의 이야기가 아니라, 이미 시작된
@@ -795,13 +800,13 @@
 
           <div class="fact" style="margin-top: 18px">
             <div class="box">
-              <h2>이미 시작된 현재</h2>
-              <p>
+              <h2 data-i18n="currentTitle">이미 시작된 현재</h2>
+              <p data-i18n-html="currentText">
                 올해 수능을 치른 현역 학생은 약 30만 명입니다.<br />
                 30년 전의 3분의 1 수준입니다.
               </p>
               <div class="divider"></div>
-              <p style="margin: 0; color: var(--danger); font-weight: 700">
+              <p style="margin: 0; color: var(--danger); font-weight: 700" data-i18n-html="currentWarning">
                 학교, 의료, 지역이 흔들리는 이유는<br />
                 2100년의 문제가 아니라, 이미 시작된 현재이기 때문입니다.
               </p>
@@ -810,19 +815,19 @@
 
           <div class="fact" style="margin-top: 18px">
             <div class="box">
-              <h2>지금 현재 일어나는 일</h2>
-              <p>
+              <h2 data-i18n="happeningTitle">지금 현재 일어나는 일</h2>
+              <p data-i18n-html="happeningSchool">
                 <strong>학교:</strong> 학생이 사라져서 학교가 닫히는 게
                 아닙니다.<br />
                 학교가 유지되지 못할 만큼, 아이가 줄었습니다.
               </p>
               <div class="divider"></div>
-              <p>
+              <p data-i18n-html="happeningMedical">
                 <strong>의료:</strong> 아이를 낳지 않는 것이 아니라,<br />
                 낳을 수 있는 병원이 사라지고 있습니다.
               </p>
               <div class="divider"></div>
-              <p style="margin: 0">
+              <p style="margin: 0" data-i18n-html="happeningRegion">
                 <strong>지역:</strong> 지역이 사라지는 이유는 사람이 떠나서가
                 아니라,<br />
                 애초에 들어오지 않기 때문입니다.
@@ -832,7 +837,7 @@
 
           <div class="fact" style="margin-top: 18px">
             <div class="box">
-              <h2>이건 경고가 아니라, 보고서입니다</h2>
+              <h2 data-i18n="reportTitle">이건 경고가 아니라, 보고서입니다</h2>
               <p
                 style="
                   margin: 0;
@@ -841,6 +846,7 @@
                   font-size: 15px;
                   line-height: 1.7;
                 "
+                data-i18n-html="reportText"
               >
                 아이 수는 줄었고,<br />
                 학교는 닫혔고,<br />
@@ -851,7 +857,7 @@
           </div>
 
           <div class="copybox">
-            <div class="kicker">공유용 캡션(복사해서 SNS에 붙여넣기)</div>
+            <div class="kicker" data-i18n="shareCaption">공유용 캡션(복사해서 SNS에 붙여넣기)</div>
             <textarea id="shareText" readonly></textarea>
             <div class="minirow">
               <button class="mini" id="btnCopyCaption" data-i18n="btnCopyCaption">캡션 복사</button>
@@ -862,13 +868,14 @@
                 href="https://funnyfunny.cloud"
                 target="_blank"
                 rel="noopener"
+                data-i18n="btnOtherServices"
                 >다른 서비스 보기</a
               >
             </div>
           </div>
 
-          <footer>
-            이 페이지는 설득이 아니라 ‘체감’을 목표로 합니다. 숫자 논쟁을
+          <footer data-i18n="footer">
+            이 페이지는 설득이 아니라 '체감'을 목표로 합니다. 숫자 논쟁을
             피하고, 이미 존재하는 장면과 선택의 흐름을 통해 현실감을 높였습니다.
           </footer>
         </section>
@@ -886,12 +893,92 @@
           title: "출산율 체감 테스트",
           subtitle: "사진을 누르고 선택하면, 마지막 문장이 남습니다.",
           screen0Title: "질문은 없습니다. 먼저, 사진을 눌러주세요.",
+          screen0Desc: "이 장면은 '미래 예측'이 아니라 <b>이미 진행 중인 현재</b>일 수 있습니다.",
+          screen0Kicker: "올해 수능을 치른 현역 학생은 약 30만 명입니다.<br />이 숫자는 이미 줄어든 '결과'입니다.",
           screen1Title: "당신이 생각하는 가장 큰 이유는 무엇인가요?",
+          screen1Desc: "정답은 없습니다. 다만, 선택은 현실로 이어집니다.",
+          screen1Kicker: "당신의 선택은 틀리지 않습니다.<br />다만, 이미 줄어든 선택지 중 하나일 뿐입니다.",
           screen2Title: "선택의 화면",
+          screen2Sub: "짧게 읽고, 다음 선택으로 넘어가세요.",
+          screen2Kicker1: "이 변화는 예측이 아닙니다.<br />이미 통계로 기록되고, 현장에서 확인되는 현재입니다.",
+          screen2Kicker2: "다음 질문: 그래도 누군가는 왜 '낳았을까요?'",
           screen3Title: "결말",
+          screen3Desc: "당신의 답은 틀리지 않았습니다. 다만, 결론은 하나로 모입니다.",
+          screen3Final1: "출산율은 선택의 문제가 아니라,<br />선택지가 사라진 결과입니다.",
+          screen3Final2: "오늘 당신이 고른 답은 '틀린 답'이 아닙니다.<br />하지만 모든 답은 같은 현실을 가리키고 있었습니다.",
+          screen3Final3: "출산율은 갑자기 떨어지지 않았습니다.<br />사회가 먼저 아이를 감당하지 못하게 됐을 뿐입니다.",
+          statTitle: "현재 합계출산율 (World Bank)",
+          statValue: "0.721",
+          statDesc: "2023년 최신치 기준. 인구 대체수준 2.1의 약 34%에 불과합니다.",
+          statSource: "출처:",
+          trendTitle: "출생아·합계출산율 추이",
+          trendSub: "통계청 장래 인구 추계 중위 추계 기준",
+          trendLabel1: "합계출산율",
+          trendLabel2: "출생아 수",
+          trendLowest: "(최저)",
+          trendExpected: "(예상)",
+          trendNote: "※합계출산율은 여성 1명이 평생 낳을 것으로 예상되는 평균 출생아 수<br /><span style=\"font-size: 11px\">출처: 통계청</span>",
+          meaningTitle: "이 숫자가 의미하는 것",
+          meaningText: "합계출산율 0.721명은 세계 최저 수준입니다. 이는 현재 출산 연령대의 여성들이 평생 동안 낳을 것으로 예상되는 자녀 수가 1명에도 미치지 못한다는 뜻입니다.",
+          meaningWarning: "만약 이 추세가 계속된다면, 2100년 한국 인구는 현재의 절반 이하로 줄어들 것으로 예측됩니다. 학교는 문을 닫고, 병원은 줄어들며, 지역은 사라집니다. 이것은 미래의 이야기가 아니라, 이미 시작된 현재입니다.",
+          currentTitle: "이미 시작된 현재",
+          currentText: "올해 수능을 치른 현역 학생은 약 30만 명입니다.<br />30년 전의 3분의 1 수준입니다.",
+          currentWarning: "학교, 의료, 지역이 흔들리는 이유는<br />2100년의 문제가 아니라, 이미 시작된 현재이기 때문입니다.",
+          happeningTitle: "지금 현재 일어나는 일",
+          happeningSchool: "<strong>학교:</strong> 학생이 사라져서 학교가 닫히는 게 아닙니다.<br />학교가 유지되지 못할 만큼, 아이가 줄었습니다.",
+          happeningMedical: "<strong>의료:</strong> 아이를 낳지 않는 것이 아니라,<br />낳을 수 있는 병원이 사라지고 있습니다.",
+          happeningRegion: "<strong>지역:</strong> 지역이 사라지는 이유는 사람이 떠나서가 아니라,<br />애초에 들어오지 않기 때문입니다.",
+          reportTitle: "이건 경고가 아니라, 보고서입니다",
+          reportText: "아이 수는 줄었고,<br />학교는 닫혔고,<br />병원은 떠났습니다.<br />이 순서는 이미 끝난 이야기입니다.",
+          shareCaption: "공유용 캡션(복사해서 SNS에 붙여넣기)",
           btnCopyCaption: "캡션 복사",
           btnCopyLink: "링크 복사",
-          btnRestart: "다시하기"
+          btnRestart: "다시하기",
+          btnOtherServices: "다른 서비스 보기",
+          footer: "이 페이지는 설득이 아니라 '체감'을 목표로 합니다. 숫자 논쟁을 피하고, 이미 존재하는 장면과 선택의 흐름을 통해 현실감을 높였습니다.",
+          copied: "복사했습니다.",
+          // 동적 콘텐츠
+          photoTag1: "지역 소멸",
+          photoTitle1: "아이 소리가 사라진 마을",
+          photoTag2: "교육 인프라",
+          photoTitle2: "문 닫는 어린이집/학원",
+          photoTag3: "도시 주거",
+          photoTitle3: "좁아지는 삶의 공간",
+          photoTag4: "의료 인프라",
+          photoTitle4: "사라지는 산부인과",
+          photoTag5: "돌봄 격차",
+          photoTitle5: "누가 돌볼 것인가",
+          photoTag6: "고령화",
+          photoTitle6: "늘어나는 노년의 비율",
+          q1Money: "경제적 부담",
+          q1MoneyDesc: "주거·교육·생활비의 압박",
+          q1Career: "시간·커리어",
+          q1CareerDesc: "경력 단절·육아 공백",
+          q1System: "제도·구조",
+          q1SystemDesc: "돌봄·노동·지원의 공백",
+          q1Values: "가치관 변화",
+          q1ValuesDesc: "결혼·출산 필요성 약화",
+          factMoneyTitle: "경제를 골랐습니다",
+          factMoneyHeadline: "비싼 삶은 출산을 '결단'으로 바꿉니다.",
+          factMoneyText: "주거와 양육 비용이 높아질수록 출산은 자연스러운 단계가 아니라 '큰 결심'이 됩니다. 사람이 의지가 없어서가 아니라, 위험과 비용이 한쪽으로 쏠리면 선택은 줄어듭니다.",
+          factCareerTitle: "커리어를 골랐습니다",
+          factCareerHeadline: "출산은 시간이 아니라 '되돌릴 수 없는 공백'이 됩니다.",
+          factCareerText: "일·돌봄의 균형이 개인에게만 맡겨질 때, 출산은 단순한 일정 조정이 아니라 삶의 궤도 변경이 됩니다. 특히 경력 회복이 어렵다고 느낄수록 선택은 뒤로 밀립니다.",
+          factSystemTitle: "구조를 골랐습니다",
+          factSystemHeadline: "돌봄이 공공의 일이 아니면, 출산은 가족의 체력전이 됩니다.",
+          factSystemText: "제도와 인프라가 부족하면 부담은 개인과 가족에게 집중됩니다. 돌봄 공백이 커질수록 출산은 '사랑'의 문제가 아니라 '운영'의 문제가 됩니다.",
+          factValuesTitle: "가치관을 골랐습니다",
+          factValuesHeadline: "가치관은 갑자기 바뀌지 않습니다. 환경이 바꾸게 합니다.",
+          factValuesText: "불확실성이 커지고 삶의 안전망이 약해질수록 사람들은 큰 결정을 미룹니다. 가치관 변화는 원인이기도 하지만, 동시에 구조적 압박의 결과이기도 합니다.",
+          q2Responsibility: "개인의 책임감",
+          q2ResponsibilityDesc: "내가 감당한다",
+          q2Family: "가족의 도움",
+          q2FamilyDesc: "지원이 있어 가능했다",
+          q2Support: "제도적 지원",
+          q2SupportDesc: "환경이 받쳐줬다",
+          q2Just: "그냥 선택",
+          q2JustDesc: "설명하기 어렵다",
+          shareTemplate: "[출산율 체감 테스트]\n내가 누른 사진: {photo}\n내 선택 1: {q1}\n내 선택 2: {q2}\n\n정답은 없었는데, 결말은 같았다.\n\"출산율은 개인의 의지 문제가 아니라,\n선택할 수 없게 만든 구조의 결과입니다.\"\n\n👉 {url}"
         },
         en: {
           metaTitle: "Birth Rate Perception Test — A Society Where Choices Disappear",
@@ -899,12 +986,92 @@
           title: "Birth Rate Perception Test",
           subtitle: "Click photos and make choices, and the final sentence remains.",
           screen0Title: "There are no questions. First, please click a photo.",
+          screen0Desc: "This scene may not be a 'future prediction' but <b>an ongoing present</b>.",
+          screen0Kicker: "About 300,000 current students took the CSAT this year.<br />This number is already a 'result' that has decreased.",
           screen1Title: "What do you think is the biggest reason?",
+          screen1Desc: "There is no right answer. However, choices lead to reality.",
+          screen1Kicker: "Your choice is not wrong.<br />However, it is just one of the already reduced options.",
           screen2Title: "Screen of Choice",
+          screen2Sub: "Read briefly and move to the next choice.",
+          screen2Kicker1: "This change is not a prediction.<br />It is already recorded in statistics and confirmed in the field.",
+          screen2Kicker2: "Next question: Still, why did someone choose to have children?",
           screen3Title: "Ending",
+          screen3Desc: "Your answer was not wrong. However, the conclusion converges to one.",
+          screen3Final1: "Birth rate is not a matter of choice,<br />but a result of disappearing options.",
+          screen3Final2: "The answer you chose today is not 'wrong'.<br />But all answers were pointing to the same reality.",
+          screen3Final3: "Birth rate did not suddenly drop.<br />Society simply became unable to afford children first.",
+          statTitle: "Current Total Fertility Rate (World Bank)",
+          statValue: "0.721",
+          statDesc: "Based on 2023 latest data. Only about 34% of the population replacement level of 2.1.",
+          statSource: "Source:",
+          trendTitle: "Births and Total Fertility Rate Trends",
+          trendSub: "Based on Statistics Korea's medium population projection",
+          trendLabel1: "Total Fertility Rate",
+          trendLabel2: "Number of Births",
+          trendLowest: "(Lowest)",
+          trendExpected: "(Expected)",
+          trendNote: "※Total fertility rate is the average number of births expected per woman in her lifetime<br /><span style=\"font-size: 11px\">Source: Statistics Korea</span>",
+          meaningTitle: "What This Number Means",
+          meaningText: "A total fertility rate of 0.721 is the world's lowest level. This means that women of childbearing age are expected to have less than one child in their lifetime.",
+          meaningWarning: "If this trend continues, South Korea's population is predicted to drop to less than half by 2100. Schools will close, hospitals will decrease, and regions will disappear. This is not a future story, but a present that has already begun.",
+          currentTitle: "A Present That Has Already Begun",
+          currentText: "About 300,000 current students took the CSAT this year.<br />One-third of the level 30 years ago.",
+          currentWarning: "The reason schools, healthcare, and regions are shaking<br />is not a problem of 2100, but a present that has already begun.",
+          happeningTitle: "What's Happening Right Now",
+          happeningSchool: "<strong>Schools:</strong> Schools are not closing because students disappeared.<br />Children decreased to the point where schools cannot be maintained.",
+          happeningMedical: "<strong>Healthcare:</strong> It's not that people aren't having children,<br />but hospitals where they can give birth are disappearing.",
+          happeningRegion: "<strong>Regions:</strong> Regions are not disappearing because people left,<br />but because they never came in the first place.",
+          reportTitle: "This is Not a Warning, But a Report",
+          reportText: "The number of children decreased,<br />schools closed,<br />hospitals left.<br />This sequence is already a finished story.",
+          shareCaption: "Share Caption (Copy and paste to SNS)",
           btnCopyCaption: "Copy Caption",
           btnCopyLink: "Copy Link",
-          btnRestart: "Restart"
+          btnRestart: "Restart",
+          btnOtherServices: "View Other Services",
+          footer: "This page aims for 'perception' rather than persuasion. It avoids number debates and enhances realism through existing scenes and the flow of choices.",
+          copied: "Copied.",
+          // 동적 콘텐츠
+          photoTag1: "Regional Extinction",
+          photoTitle1: "Villages Where Children's Voices Disappeared",
+          photoTag2: "Education Infrastructure",
+          photoTitle2: "Closing Daycare Centers/Schools",
+          photoTag3: "Urban Housing",
+          photoTitle3: "Narrowing Living Spaces",
+          photoTag4: "Healthcare Infrastructure",
+          photoTitle4: "Disappearing Obstetrics",
+          photoTag5: "Care Gap",
+          photoTitle5: "Who Will Care?",
+          photoTag6: "Aging",
+          photoTitle6: "Increasing Elderly Ratio",
+          q1Money: "Economic Burden",
+          q1MoneyDesc: "Pressure from housing, education, living costs",
+          q1Career: "Time & Career",
+          q1CareerDesc: "Career interruption, childcare gap",
+          q1System: "System & Structure",
+          q1SystemDesc: "Gap in care, labor, support",
+          q1Values: "Value Change",
+          q1ValuesDesc: "Weakening necessity of marriage and childbirth",
+          factMoneyTitle: "You chose Economy",
+          factMoneyHeadline: "Expensive life turns childbirth into a 'decision'.",
+          factMoneyText: "As housing and child-rearing costs rise, childbirth becomes not a natural step but a 'big decision'. Not because people lack will, but because when risks and costs lean to one side, choices decrease.",
+          factCareerTitle: "You chose Career",
+          factCareerHeadline: "Childbirth becomes not time but an 'irreversible gap'.",
+          factCareerText: "When the balance of work and care is left only to individuals, childbirth becomes not a simple schedule adjustment but a life trajectory change. Especially as career recovery feels difficult, choices are pushed back.",
+          factSystemTitle: "You chose Structure",
+          factSystemHeadline: "If care is not a public matter, childbirth becomes a family's endurance test.",
+          factSystemText: "When systems and infrastructure are lacking, burdens concentrate on individuals and families. As care gaps grow, childbirth becomes not a matter of 'love' but a matter of 'operation'.",
+          factValuesTitle: "You chose Values",
+          factValuesHeadline: "Values don't change suddenly. The environment changes them.",
+          factValuesText: "As uncertainty increases and life safety nets weaken, people postpone big decisions. Value change is both a cause and simultaneously a result of structural pressure.",
+          q2Responsibility: "Personal Responsibility",
+          q2ResponsibilityDesc: "I will handle it",
+          q2Family: "Family Help",
+          q2FamilyDesc: "Support made it possible",
+          q2Support: "Institutional Support",
+          q2SupportDesc: "Environment supported it",
+          q2Just: "Just a Choice",
+          q2JustDesc: "Hard to explain",
+          shareTemplate: "[Birth Rate Perception Test]\nPhoto I clicked: {photo}\nMy choice 1: {q1}\nMy choice 2: {q2}\n\nThere was no right answer, but the ending was the same.\n\"Birth rate is not a matter of individual will,\nbut a result of structures that made choices impossible.\"\n\n👉 {url}"
         }
       };
       const defaultLang = "ko";
@@ -925,6 +1092,9 @@
         document.documentElement.lang = currentLang;
         document.querySelectorAll("[data-i18n]").forEach((el) => {
           el.textContent = t(el.dataset.i18n);
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+          el.innerHTML = t(el.dataset.i18nHtml);
         });
       }
       function setLang(lang, options = {}) {
@@ -964,94 +1134,95 @@
       });
       setLang(detectLang(), { updateUrl: false });
 
-      const entryPhotos = [
-        {
-          tag: "지역 소멸",
-          title: "아이 소리가 사라진 마을",
-          img: "https://picsum.photos/800/500?random=1",
-        },
-        {
-          tag: "교육 인프라",
-          title: "문 닫는 어린이집/학원",
-          img: "https://picsum.photos/800/500?random=2",
-        },
-        {
-          tag: "도시 주거",
-          title: "좁아지는 삶의 공간",
-          img: "https://picsum.photos/800/500?random=3",
-        },
-        {
-          tag: "의료 인프라",
-          title: "사라지는 산부인과",
-          img: "https://picsum.photos/800/500?random=4",
-        },
-        {
-          tag: "돌봄 격차",
-          title: "누가 돌볼 것인가",
-          img: "https://picsum.photos/800/500?random=5",
-        },
-        {
-          tag: "고령화",
-          title: "늘어나는 노년의 비율",
-          img: "https://picsum.photos/800/500?random=6",
-        },
-      ];
+      function getEntryPhotos() {
+        const isKo = currentLang === "ko";
+        return [
+          {
+            tag: isKo ? t("photoTag1") : t("photoTag1"),
+            title: isKo ? t("photoTitle1") : t("photoTitle1"),
+            img: "https://picsum.photos/800/500?random=1",
+          },
+          {
+            tag: isKo ? t("photoTag2") : t("photoTag2"),
+            title: isKo ? t("photoTitle2") : t("photoTitle2"),
+            img: "https://picsum.photos/800/500?random=2",
+          },
+          {
+            tag: isKo ? t("photoTag3") : t("photoTag3"),
+            title: isKo ? t("photoTitle3") : t("photoTitle3"),
+            img: "https://picsum.photos/800/500?random=3",
+          },
+          {
+            tag: isKo ? t("photoTag4") : t("photoTag4"),
+            title: isKo ? t("photoTitle4") : t("photoTitle4"),
+            img: "https://picsum.photos/800/500?random=4",
+          },
+          {
+            tag: isKo ? t("photoTag5") : t("photoTag5"),
+            title: isKo ? t("photoTitle5") : t("photoTitle5"),
+            img: "https://picsum.photos/800/500?random=5",
+          },
+          {
+            tag: isKo ? t("photoTag6") : t("photoTag6"),
+            title: isKo ? t("photoTitle6") : t("photoTitle6"),
+            img: "https://picsum.photos/800/500?random=6",
+          },
+        ];
+      }
 
       // 1차 질문 옵션
-      const q1Options = [
-        { key: "money", label: "경제적 부담", desc: "주거·교육·생활비의 압박" },
-        { key: "career", label: "시간·커리어", desc: "경력 단절·육아 공백" },
-        { key: "system", label: "제도·구조", desc: "돌봄·노동·지원의 공백" },
-        { key: "values", label: "가치관 변화", desc: "결혼·출산 필요성 약화" },
-      ];
+      function getQ1Options() {
+        return [
+          { key: "money", label: t("q1Money"), desc: t("q1MoneyDesc") },
+          { key: "career", label: t("q1Career"), desc: t("q1CareerDesc") },
+          { key: "system", label: t("q1System"), desc: t("q1SystemDesc") },
+          { key: "values", label: t("q1Values"), desc: t("q1ValuesDesc") },
+        ];
+      }
 
-      // 선택별 ‘팩트형’ 화면(숫자 대신 짧은 사실 문장 + 이미지)
-      const factByKey = {
-        money: {
-          title: "경제를 골랐습니다",
-          headline: "비싼 삶은 출산을 ‘결단’으로 바꿉니다.",
-          text:
-            "주거와 양육 비용이 높아질수록 출산은 자연스러운 단계가 아니라 ‘큰 결심’이 됩니다. " +
-            "사람이 의지가 없어서가 아니라, 위험과 비용이 한쪽으로 쏠리면 선택은 줄어듭니다.",
-          img: "https://picsum.photos/1000/700?random=11",
-        },
-        career: {
-          title: "커리어를 골랐습니다",
-          headline: "출산은 시간이 아니라 ‘되돌릴 수 없는 공백’이 됩니다.",
-          text:
-            "일·돌봄의 균형이 개인에게만 맡겨질 때, 출산은 단순한 일정 조정이 아니라 삶의 궤도 변경이 됩니다. " +
-            "특히 경력 회복이 어렵다고 느낄수록 선택은 뒤로 밀립니다.",
-          img: "https://picsum.photos/1000/700?random=12",
-        },
-        system: {
-          title: "구조를 골랐습니다",
-          headline: "돌봄이 공공의 일이 아니면, 출산은 가족의 체력전이 됩니다.",
-          text:
-            "제도와 인프라가 부족하면 부담은 개인과 가족에게 집중됩니다. " +
-            "돌봄 공백이 커질수록 출산은 ‘사랑’의 문제가 아니라 ‘운영’의 문제가 됩니다.",
-          img: "https://picsum.photos/1000/700?random=13",
-        },
-        values: {
-          title: "가치관을 골랐습니다",
-          headline: "가치관은 갑자기 바뀌지 않습니다. 환경이 바꾸게 합니다.",
-          text:
-            "불확실성이 커지고 삶의 안전망이 약해질수록 사람들은 큰 결정을 미룹니다. " +
-            "가치관 변화는 원인이기도 하지만, 동시에 구조적 압박의 결과이기도 합니다.",
-          img: "https://picsum.photos/1000/700?random=14",
-        },
-      };
+      // 선택별 '팩트형' 화면(숫자 대신 짧은 사실 문장 + 이미지)
+      function getFactByKey() {
+        return {
+          money: {
+            title: t("factMoneyTitle"),
+            headline: t("factMoneyHeadline"),
+            text: t("factMoneyText"),
+            img: "https://picsum.photos/1000/700?random=11",
+          },
+          career: {
+            title: t("factCareerTitle"),
+            headline: t("factCareerHeadline"),
+            text: t("factCareerText"),
+            img: "https://picsum.photos/1000/700?random=12",
+          },
+          system: {
+            title: t("factSystemTitle"),
+            headline: t("factSystemHeadline"),
+            text: t("factSystemText"),
+            img: "https://picsum.photos/1000/700?random=13",
+          },
+          values: {
+            title: t("factValuesTitle"),
+            headline: t("factValuesHeadline"),
+            text: t("factValuesText"),
+            img: "https://picsum.photos/1000/700?random=14",
+          },
+        };
+      }
 
       // 2차 질문 옵션(어떤 걸 골라도 결말은 동일하게 수렴)
-      const q2Options = [
-        {
-          key: "responsibility",
-          label: "개인의 책임감",
-          desc: "내가 감당한다",
-        },
-        { key: "family", label: "가족의 도움", desc: "지원이 있어 가능했다" },
-        { key: "support", label: "제도적 지원", desc: "환경이 받쳐줬다" },
-        { key: "just", label: "그냥 선택", desc: "설명하기 어렵다" },
-      ];
+      function getQ2Options() {
+        return [
+          {
+            key: "responsibility",
+            label: t("q2Responsibility"),
+            desc: t("q2ResponsibilityDesc"),
+          },
+          { key: "family", label: t("q2Family"), desc: t("q2FamilyDesc") },
+          { key: "support", label: t("q2Support"), desc: t("q2SupportDesc") },
+          { key: "just", label: t("q2Just"), desc: t("q2JustDesc") },
+        ];
+      }
 
       // ====== 상태 ======
       const state = {
@@ -1107,16 +1278,16 @@
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard
             .writeText(text)
-            .then(() => alert("복사했습니다."));
+            .then(() => alert(t("copied")));
         } else {
           // 폴백
-          const t = document.createElement("textarea");
-          t.value = text;
-          document.body.appendChild(t);
-          t.select();
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
           document.execCommand("copy");
-          document.body.removeChild(t);
-          alert("복사했습니다.");
+          document.body.removeChild(textarea);
+          alert(t("copied"));
         }
       }
       function currentUrl() {
@@ -1132,6 +1303,7 @@
       // ====== 렌더: 사진 그리드 ======
       function renderEntryPhotos() {
         photoGrid.innerHTML = "";
+        const entryPhotos = getEntryPhotos();
         entryPhotos.forEach((p, idx) => {
           const card = document.createElement("div");
           card.className = "card";
@@ -1156,6 +1328,7 @@
       // ====== 렌더: 1차 질문 ======
       function renderQ1() {
         q1.innerHTML = "";
+        const q1Options = getQ1Options();
         q1Options.forEach((opt) => {
           const b = document.createElement("button");
           b.className = "btn";
@@ -1163,7 +1336,7 @@
           b.addEventListener("click", () => {
             state.q1 = opt.key;
             // 팩트 화면 세팅
-            const f = factByKey[state.q1];
+            const f = getFactByKey()[state.q1];
             factTitle.textContent = f.title;
             factHeadline.textContent = f.headline;
             factText.textContent = f.text;
@@ -1181,6 +1354,7 @@
       // ====== 렌더: 2차 질문 ======
       function renderQ2() {
         q2.innerHTML = "";
+        const q2Options = getQ2Options();
         q2Options.forEach((opt) => {
           const b = document.createElement("button");
           b.className = "btn";
@@ -1191,23 +1365,22 @@
             setBackdrop(finalBackdrop);
             flashScreen();
             // 최종 공유 문구 생성
+            const entryPhotos = getEntryPhotos();
+            const q1Options = getQ1Options();
+            const q2Options = getQ2Options();
             const chosenPhoto =
-              entryPhotos[state.entryPhotoIdx]?.title ?? "사진";
+              entryPhotos[state.entryPhotoIdx]?.title ?? (currentLang === "ko" ? "사진" : "Photo");
             const chosenQ1 =
-              q1Options.find((x) => x.key === state.q1)?.label ?? "선택";
+              q1Options.find((x) => x.key === state.q1)?.label ?? (currentLang === "ko" ? "선택" : "Choice");
             const chosenQ2 =
-              q2Options.find((x) => x.key === state.q2)?.label ?? "선택";
+              q2Options.find((x) => x.key === state.q2)?.label ?? (currentLang === "ko" ? "선택" : "Choice");
 
-            const caption = `[출산율 체감 테스트]
-내가 누른 사진: ${chosenPhoto}
-내 선택 1: ${chosenQ1}
-내 선택 2: ${chosenQ2}
-
-정답은 없었는데, 결말은 같았다.
-“출산율은 개인의 의지 문제가 아니라,
-선택할 수 없게 만든 구조의 결과입니다.”
-
-👉 ${currentUrl()}`;
+            const caption = t("shareTemplate", {
+              photo: chosenPhoto,
+              q1: chosenQ1,
+              q2: chosenQ2,
+              url: currentUrl()
+            });
 
             shareText.value = caption;
             setTimeout(() => autoResizeTextarea(shareText), 10);
@@ -1229,17 +1402,30 @@
         state.q2 = null;
         showOnly(s0);
         setProgress(0);
+        const entryPhotos = getEntryPhotos();
         setBackdrop(entryPhotos[0]?.img);
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
 
       // ====== 초기화 ======
-      renderEntryPhotos();
-      renderQ1();
-      renderQ2();
-      setProgress(0);
-      showOnly(s0);
-      setBackdrop(entryPhotos[0]?.img);
+      function init() {
+        renderEntryPhotos();
+        renderQ1();
+        renderQ2();
+        setProgress(0);
+        showOnly(s0);
+        const entryPhotos = getEntryPhotos();
+        setBackdrop(entryPhotos[0]?.img);
+      }
+      
+      // 언어 변경 시 재렌더링
+      const originalSetLang = setLang;
+      setLang = function(lang, options) {
+        originalSetLang(lang, options);
+        init();
+      };
+      
+      init();
 
       // textarea 자동 높이 조정
       if (shareText) {
