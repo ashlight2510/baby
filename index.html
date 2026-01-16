@@ -1425,11 +1425,41 @@
         setBackdrop(entryPhotos[0]?.img);
       }
       
-      // 언어 변경 시 재렌더링
+      // 언어 변경 시 재렌더링을 위해 setLang 래핑
       const originalSetLang = setLang;
       setLang = function(lang, options) {
         originalSetLang(lang, options);
-        init();
+        // 언어 변경 시 동적 콘텐츠 재렌더링 (현재 상태 유지)
+        if (typeof renderEntryPhotos === "function" && typeof renderQ1 === "function" && typeof renderQ2 === "function") {
+          renderEntryPhotos();
+          renderQ1();
+          renderQ2();
+          // 현재 화면이 s2이고 fact 데이터가 있다면 업데이트
+          if (state.q1 && document.getElementById("s2") && !document.getElementById("s2").classList.contains("hidden")) {
+            const f = getFactByKey()[state.q1];
+            if (f && factTitle && factHeadline && factText) {
+              factTitle.textContent = f.title;
+              factHeadline.textContent = f.headline;
+              factText.textContent = f.text;
+            }
+          }
+          // 현재 화면이 s3이고 shareText가 있다면 업데이트
+          if (state.q1 && state.q2 && document.getElementById("s3") && !document.getElementById("s3").classList.contains("hidden") && shareText) {
+            const entryPhotos = getEntryPhotos();
+            const q1Options = getQ1Options();
+            const q2Options = getQ2Options();
+            const chosenPhoto = entryPhotos[state.entryPhotoIdx]?.title ?? (currentLang === "ko" ? "사진" : "Photo");
+            const chosenQ1 = q1Options.find((x) => x.key === state.q1)?.label ?? (currentLang === "ko" ? "선택" : "Choice");
+            const chosenQ2 = q2Options.find((x) => x.key === state.q2)?.label ?? (currentLang === "ko" ? "선택" : "Choice");
+            shareText.value = t("shareTemplate", {
+              photo: chosenPhoto,
+              q1: chosenQ1,
+              q2: chosenQ2,
+              url: currentUrl()
+            });
+            setTimeout(() => autoResizeTextarea(shareText), 10);
+          }
+        }
       };
       
       init();
